@@ -43,6 +43,7 @@ if  'Read' in st.session_state:
     if Data_col and Method:#
         if Method =='IQR':
             if st.button('Remove The Outliers Through IQR'):
+                Read_copy = Read.copy()
                 Q1 = np.percentile(Read[Data_col_Remove],25)
                 Q2 = np.percentile(Read[Data_col_Remove],50)
                 Q3 = np.percentile(Read[Data_col_Remove],75)
@@ -66,7 +67,14 @@ if  'Read' in st.session_state:
                     st.write('Upper',Upper_IQR)
                 outliers = Read[(Read[Data_col_Remove] < Lower_IQR) | (Read[Data_col_Remove] > Upper_IQR)]
                 st.write('Outliers',outliers)
+                st.session_state['Read'] = Read_copy
 
+
+                
+
+if st.button('Go to Outliers'):
+     st.session_state['Read'] = Read    
+     st.switch_page('C:/Users/singh/OneDrive/Documents/Projects/Data Processing UI(Streamlit)/pages/Feature_Encoding.py')
                 
 
 
